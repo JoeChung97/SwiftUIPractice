@@ -14,6 +14,8 @@ enum Direction {
 
 struct CardStack: View {
     
+    @Binding var pageIndex: Int
+    
     @State var cardQueue: [String] = ["Test 1", "Test 2", "Test 3", "Test 4"]
     @State var subtitleQueue: [String] = ["21, Student", "22, Designer", "23, Programmer", "21, Student"]
     
@@ -39,6 +41,39 @@ struct CardStack: View {
         
         VStack {
             
+            HStack {
+                Button(action: {
+                    goToProfile()
+                }, label: {
+                    Text("T")
+                        .bold()
+                        .foregroundColor(.white)
+                })
+                .frame(width: 50, height: 50, alignment: .center)
+                .background(Color.yellow
+                                .clipShape(Circle())
+                                .shadow(radius: 2))
+                .padding(.leading, 25)
+                
+                Spacer()
+                
+                Button(action: {
+                    goToMessages()
+                }, label: {
+                    Text("T")
+                        .bold()
+                        .foregroundColor(.white)
+                })
+                .frame(width: 50, height: 50, alignment: .center)
+                .background(Color.yellow
+                                .clipShape(Circle())
+                                .shadow(radius: 2))
+                .padding(.trailing, 25)
+            }
+            .padding(.top, 10)
+            
+            Spacer()
+            
             ZStack {
                 
                 Text("Nothing Left!")
@@ -56,6 +91,8 @@ struct CardStack: View {
                     fetch()
                 }
             }
+            
+            Spacer()
             
             HStack {
                 
@@ -91,9 +128,18 @@ struct CardStack: View {
                 .padding(.leading, 25)
                 
             }
+            .padding(.bottom, 10)
             
         }
         
+    }
+    
+    private func goToProfile() {
+        pageIndex = 0
+    }
+    
+    private func goToMessages() {
+        pageIndex = 2
     }
     
     private func removeCardPressed(direction: Direction) {
@@ -151,6 +197,6 @@ struct CardStack: View {
 
 struct CardStack_Previews: PreviewProvider {
     static var previews: some View {
-        CardStack()
+        CardStack(pageIndex: .constant(0))
     }
 }
