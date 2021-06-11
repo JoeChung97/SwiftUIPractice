@@ -33,6 +33,7 @@ struct CardStack: View {
     @State var cardTwoRotation: Double? = 0.0
     
     var top = 0
+    @State var loaded = false
     
     var body: some View {
         
@@ -49,7 +50,11 @@ struct CardStack: View {
                     .zIndex(topCardZ)
                 
             }.onAppear {
-                fetch()
+                if !loaded {
+                    print("Fetching")
+                    loaded = true
+                    fetch()
+                }
             }
             
             HStack {

@@ -19,8 +19,8 @@ struct SwipeableCard: View {
     
     var onRemoved : (Direction) -> ()
     
-    var title: String!
-    var subtitle: String!
+    var title: String?
+    var subtitle: String?
     
     var body: some View {
         
@@ -37,7 +37,7 @@ struct SwipeableCard: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Text(title)
+                        Text(title ?? "")
                             .font(.largeTitle)
                             .bold()
                             .foregroundColor(.white)
@@ -45,7 +45,7 @@ struct SwipeableCard: View {
                         Spacer()
                     }
                     HStack {
-                        Text(subtitle)
+                        Text(subtitle ?? "")
                             .font(.headline)
                             .bold()
                             .foregroundColor(.white)
